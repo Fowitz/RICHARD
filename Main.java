@@ -168,6 +168,7 @@ public class Main {
                         String msg = capturarEntrada("Digite o texto para imprimir: ");
                         ImpressoraDLL.INSTANCE.ImpressaoTexto(msg, 1, 4, 0);
                         ImpressoraDLL.INSTANCE.Corte(2);
+                        System.out.println("texto impresso");
                     } else {
                         System.out.println("Abre a conexão primeiro!");
                     }
@@ -177,6 +178,7 @@ public class Main {
                         String qr = capturarEntrada("Digite o conteúdo do QR Code: ");
                         ImpressoraDLL.INSTANCE.ImpressaoQRCode(qr, 6, 4);
                         ImpressoraDLL.INSTANCE.Corte(2);
+                        System.out.println("QRCode impresso");
                     } else {
                         System.out.println("Abra a conexão primeiro!");
                     }
@@ -185,13 +187,14 @@ public class Main {
                     if (conexaoAberta) {
                         try {
                             // O try ele ajuda a não deixar o codigo finalizar caso de algum erro, ele é tipo um Tente executar esse codigo.
-                            int tipoCodigo = Integer.parseInt(capturarEntrada("Tipo do código (Use: 8 = CODE 128)")); // {A012345678912
-                            String dadosCod = capturarEntrada("Dados do código de barra (somente números/permitido conforme tipo): ");
-                            int altura = Integer.parseInt(capturarEntrada("Altura (1 até 255, coloque 100): "));
-                            int largura = Integer.parseInt(capturarEntrada("Largura (1 até 6), coloque 2: "));
-                            int hri = Integer.parseInt(capturarEntrada("HRI (1 = Acima do codigo, 2 = Abaixo do codigo, 3 = Ambos, 4 = Não impresso.), coloque 3:"));
+                            int tipoCodigo = 8; // {A012345678912
+                            String dadosCod = "{A012345678912";
+                            int altura = 100;
+                            int largura = 2;
+                            int hri = 3;
                             ImpressoraDLL.INSTANCE.ImpressaoCodigoBarras(tipoCodigo, dadosCod, altura, largura, hri);
                             ImpressoraDLL.INSTANCE.Corte(2);
+                            System.out.println("Codigo de barra impresso");
                         } catch (NumberFormatException e) {
                             // O Catch é para caso se der erro mostrar alguma coisa, por exemplo uma mensagem igual a baixo
                             System.out.println("Entrada numérica inválida. Operação cancelada.");
@@ -208,6 +211,7 @@ public class Main {
                             try {
                                 String conteudo = ImpressoraDLL.lerArquivoComoString(xml.getAbsolutePath());
                                 ImpressoraDLL.INSTANCE.ImprimeXMLSAT(conteudo, 0);
+                                System.out.println("XML SAT impresso");
                             } catch (IOException e) {
                                 System.out.println("Erro lendo o arquivo: " + e.getMessage());
                             }
@@ -228,6 +232,7 @@ public class Main {
 
                                 String assQRCode = capturarEntrada("Digite a assinatura do QRCode (assQRCode) ou deixe em branco se não tiver: ");
                                 ImpressoraDLL.INSTANCE.ImprimeXMLCancelamentoSAT(conteudoCanc, assQRCode, 0);
+                                System.out.println("XML Cancelamento SAT impresso");
                             } catch (IOException e) {
                                 System.out.println("Erro lendo o arquivo: " + e.getMessage());
                             }
@@ -240,6 +245,7 @@ public class Main {
                     if (conexaoAberta) {
                         int ret = ImpressoraDLL.INSTANCE.AbreGavetaElgin();
                         System.out.println("Comando abrir gaveta Elgin enviado. Código retorno: " + ret);
+                        System.out.println("Gaveta Aberta");
                     } else {
                         System.out.println("Abra a conexão primeiro!");
                     }
@@ -247,11 +253,12 @@ public class Main {
                 case "9": //Abrir Gaveta com parâmentros
                     if (conexaoAberta) {
                         try {
-                            int pino = Integer.parseInt(capturarEntrada("Pino (0 ou 1): "));
-                            int ti = Integer.parseInt(capturarEntrada("Tempo de pulso INICIO (ms): "));
-                            int tf = Integer.parseInt(capturarEntrada("Tempo de pulso FIM (ms): "));
+                            int pino = 1;
+                            int ti = 5;
+                            int tf = 10;
                             int retG = ImpressoraDLL.INSTANCE.AbreGaveta(pino, ti, tf);
                             System.out.println("Comando abrir gaveta enviado. Código retorno: " + retG);
+                            System.out.println("Gaveta Aberta");
                         } catch (NumberFormatException e) {
                             System.out.println("Entrada numérica inválida. Operação cancelada.");
                         }
@@ -262,9 +269,9 @@ public class Main {
                 case "10": // Sinal Sonoro
                     if (conexaoAberta) {
                         try {
-                            int qtd = Integer.parseInt(capturarEntrada("Quantidade de sinais: "));
-                            int tInicio = Integer.parseInt(capturarEntrada("Tempo início (ms): "));
-                            int tFim = Integer.parseInt(capturarEntrada("Tempo fim (ms): "));
+                            int qtd = 4;
+                            int tInicio = 5;
+                            int tFim = 5;
                             ImpressoraDLL.INSTANCE.SinalSonoro(qtd, tInicio, tFim);
                         } catch (NumberFormatException e) {
                             System.out.println("Entrada numérica inválida. Operação cancelada.");
