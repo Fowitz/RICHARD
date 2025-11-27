@@ -166,7 +166,7 @@ public class Main {
                     if (conexaoAberta) {
                         //ConexãoAberta é a variavel que foi criada com private boolean recebendo false, e aqui esta vendo se ela é true ou false
                         String msg = capturarEntrada("Digite o texto para imprimir: ");
-                        ImpressoraDLL.INSTANCE.ImpressaoTexto(msg, 1, 0, 4);
+                        ImpressoraDLL.INSTANCE.ImpressaoTexto(msg, 1, 4, 0);
                         ImpressoraDLL.INSTANCE.Corte(2);
                     } else {
                         System.out.println("Abre a conexão primeiro!");
@@ -187,9 +187,9 @@ public class Main {
                             // O try ele ajuda a não deixar o codigo finalizar caso de algum erro, ele é tipo um Tente executar esse codigo.
                             int tipoCodigo = Integer.parseInt(capturarEntrada("Tipo do código (Use: 8 = CODE 128)")); // {A012345678912
                             String dadosCod = capturarEntrada("Dados do código de barra (somente números/permitido conforme tipo): ");
-                            int altura = Integer.parseInt(capturarEntrada("Altura (1 até 255): "));
-                            int largura = Integer.parseInt(capturarEntrada("Largura (1 até 6): "));
-                            int hri = Integer.parseInt(capturarEntrada("HRI (1 = Acima do codigo, 2 = Abaixo do codigo, 3 = Ambos, 4 = Não impresso.)"));
+                            int altura = Integer.parseInt(capturarEntrada("Altura (1 até 255, coloque 100): "));
+                            int largura = Integer.parseInt(capturarEntrada("Largura (1 até 6), coloque 2: "));
+                            int hri = Integer.parseInt(capturarEntrada("HRI (1 = Acima do codigo, 2 = Abaixo do codigo, 3 = Ambos, 4 = Não impresso.), coloque 3:"));
                             ImpressoraDLL.INSTANCE.ImpressaoCodigoBarras(tipoCodigo, dadosCod, altura, largura, hri);
                             ImpressoraDLL.INSTANCE.Corte(2);
                         } catch (NumberFormatException e) {
